@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Receipt</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .receipt {
+            width: 300px;
+            border: 2px solid #ddd;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .receipt h1 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2196f3;
+        }
+
+        .receipt table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .receipt table th,
+        .receipt table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .receipt table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .receipt .top-section {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .receipt .top-section h2 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .receipt .company-info {
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .receipt .contact-info {
+            font-size: 10px;
+            color: #aaa;
+        }
+
+        .receipt .amount-section {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .receipt .amount-section span {
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="receipt">
+        <div class="top-section">
+            <h2>RECEIPT</h2>
+            <div class="company-info">
+                <b>Company Name</b><br>
+                123 Main Street, Anytown, CA 12345
+            </div>
+            <div class="contact-info">
+                Phone: (555) 555-5555<br>
+                Email: info@company.com
+            </div>
+        </div>
+        <h1>MONEY RECEIPT</h1>
+        <table>
+            <tr>
+                <th width="50%">NO</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Received with thanks from</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>In words</th>
+                <td></td>
+            </tr>
+            <tr>
+                <th>For</th>
+                <td></td>
+            </tr>
+        </table>
+        <div class="amount-section">
+            Amount Paid: $<span>0.00</span>
+        </div>
+    </div>
+</body>
+
+</html>

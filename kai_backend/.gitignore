@@ -1,0 +1,30 @@
+# Operating system specific files
+Thumbs.db
+.DS_Store
+
+# IDE and editor specific files
+*.pyc
+*.egg-info
+.idea/
+.vscode/
+
+# Temporary files
+__pycache__/
+*.log
+
+# Environment variables
+.env
+
+# Test data
+tests/data/*.csv
+tests/data/*.json
+
+# Documentation output
+docs/_build/
+
+# Coverage reports
+.coverage
+
+# Flask specific
+instance/
+.webassets-cache

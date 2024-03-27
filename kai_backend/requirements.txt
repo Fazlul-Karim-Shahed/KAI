@@ -1,0 +1,7 @@
+Flask
+asyncio
+pymongo
+pymon
+Flask-Bcrypt
+flask_bcrypt
+transformers
