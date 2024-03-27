@@ -10,11 +10,9 @@ async def get_emotion_by_text():
 
         classifier = pipeline("text-classification",model='bhadresh-savani/distilbert-base-uncased-emotion', return_all_scores=True)
         prediction = classifier(data['prompt'])
-        print(prediction)
-        return jsonify({"message": "ok"})
+        # print(prediction)
+        return jsonify({"message": "ok", "error": False, "data": prediction})
 
 
-        
-    
     except Exception as err:
         return jsonify({"message": str(err), "error": True })
