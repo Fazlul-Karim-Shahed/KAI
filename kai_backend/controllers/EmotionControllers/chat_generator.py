@@ -33,7 +33,7 @@ async def chat_generator():
         arr = []
         for seq in sequences:
             arr.append(seq['generated_text'])
-            # print(f"Result: {seq['generated_text']}")
+            print(f"Result: {seq['generated_text']}")
 
         return  jsonify({"message": "Ok", "error": False, "data": arr })
 
