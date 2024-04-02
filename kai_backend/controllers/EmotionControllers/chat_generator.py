@@ -1,41 +1,49 @@
 
 from flask import request, jsonify, make_response
-from transformers import AutoTokenizer, AutoModelForCausalLM
-import transformers
-import torch
+import json
+import sagemaker
+import boto3
+from sagemaker.huggingface import HuggingFaceModel, get_huggingface_llm_image_uri
 
 async def chat_generator():
     try:
 
-        model = "tiiuae/falcon-7b"
+        
 
-        data = request.get_json()
-        print(data['prompt'])
+        try:
+            role = sagemaker.get_execution_role()
+        except ValueError:
+            iam = boto3.client('iam')
+            role = iam.get_role(RoleName='sagemaker_execution_role')['Role']['Arn']
 
-        tokenizer = AutoTokenizer.from_pretrained(model)
-        pipeline = transformers.pipeline(
-            "text-generation",
-            model=model,
-            tokenizer=tokenizer,
-            torch_dtype=torch.bfloat16,
-            trust_remote_code=True,
-            device_map="auto",
+        # Hub Model configuration. https://huggingface.co/models
+        hub = {
+            'HF_MODEL_ID':'TheBloke/Falcon-180B-Chat-GGUF',
+            'SM_NUM_GPUS': json.dumps(8)
+        }
+
+
+
+        # create Hugging Face Model Class
+        huggingface_model = HuggingFaceModel(
+            image_uri=get_huggingface_llm_image_uri("huggingface",version="1.4.2"),
+            env=hub,
+            role=role, 
         )
-        sequences = pipeline(
-        "Girafatron is obsessed with giraffes, the most glorious animal on the face of this Earth. Giraftron believes all other animals are irrelevant when compared to the glorious majesty of the giraffe.\nDaniel: Hello, Girafatron!\nGirafatron:",
-            truncation=True,
-            do_sample=True,
-            top_k=10,
-            num_return_sequences=1,
-            eos_token_id=tokenizer.eos_token_id,
+
+        # deploy model to SageMaker Inference
+        predictor = huggingface_model.deploy(
+            initial_instance_count=1,
+            instance_type="ml.p4d.24xlarge",
+            container_startup_health_check_timeout=2100,
         )
+        
+        # send request
+        predictor.predict({
+            "inputs": "My name is Clara and I am",
+        })
 
-        arr = []
-        for seq in sequences:
-            arr.append(seq['generated_text'])
-            print(f"Result: {seq['generated_text']}")
-
-        return  jsonify({"message": "Ok", "error": False, "data": arr })
+        
 
 
 
