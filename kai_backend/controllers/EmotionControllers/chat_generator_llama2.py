@@ -37,7 +37,7 @@ async def chat_generator_llama():
         )
 
         sequences = pipeline(
-            'I liked "Breaking Bad" and "Band of Brothers". Do you have any recommendations of other shows I might like?\n',
+            request.get_json()['prompt'],
             do_sample=True,
             top_k=10,
             num_return_sequences=1,
