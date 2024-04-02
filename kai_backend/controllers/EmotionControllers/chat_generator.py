@@ -7,9 +7,7 @@ from sagemaker.huggingface import HuggingFaceModel, get_huggingface_llm_image_ur
 
 async def chat_generator():
     try:
-
-        
-
+        print(request.get_json()['prompt'])
         try:
             role = sagemaker.get_execution_role()
         except ValueError:
