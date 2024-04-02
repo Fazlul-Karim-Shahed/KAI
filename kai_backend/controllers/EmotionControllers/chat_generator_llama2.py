@@ -1,6 +1,8 @@
 
 from flask import request, jsonify, make_response
 from transformers import AutoTokenizer, AutoModelForCausalLM, LlamaForCausalLM
+import transformers
+import torch
 
 async def chat_generator_llama():
     try:
@@ -22,9 +24,7 @@ async def chat_generator_llama():
         
         # return jsonify({"message": tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0], "error": False })
 
-        from transformers import AutoTokenizer
-        import transformers
-        import torch
+        
 
         model = "meta-llama/Llama-2-7b-chat-hf"
 
