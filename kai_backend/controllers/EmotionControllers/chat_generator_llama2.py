@@ -1,14 +1,17 @@
 
 from flask import request, jsonify, make_response
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, LlamaForCausalLM
 
 async def chat_generator_llama():
     try:
         print(request.get_json()['prompt'])
         
 
-        tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-70b-hf")
-        model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-70b-hf")
+        # tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-70b-hf")
+        # model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-70b-hf")
+
+        model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
+        tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
 
         prompt = "Hey, are you conscious? Can you talk to me?"
         inputs = tokenizer(prompt, return_tensors="pt")
