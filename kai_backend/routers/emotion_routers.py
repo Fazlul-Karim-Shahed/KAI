@@ -22,5 +22,5 @@ async def falcon():
 
 
 @emotionRouters.route('/api/emotion/chat/llama', methods=['POST'])
-async def falcon():
+async def llama():
         return await chat_generator_llama()
