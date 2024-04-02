@@ -13,7 +13,7 @@ async def chat_generator_llama():
         model = LlamaForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf")
         tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf")
 
-        prompt = "Hey, are you conscious? Can you talk to me?"
+        prompt = request.get_json()['prompt']
         inputs = tokenizer(prompt, return_tensors="pt")
 
         # Generate
